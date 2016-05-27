@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+	<!-- 给实体Bean一个别名-->
+		<typeAlias type="com.singbon.weixin.entity.User" alias="User" />
+		<typeAlias type="com.singbon.weixin.entity.UserLoginList" alias="UserLoginList" />
+		<typeAlias type="com.singbon.weixin.entity.Resources" alias="Resources"/>
+		<typeAlias type="com.singbon.weixin.entity.Roles" alias="Roles"/>
+		<typeAlias type="com.singbon.weixin.entity.ResourceRoles" alias="ResourceRoles"/>
+		<typeAlias type="com.singbon.weixin.entity.UserRoles" alias="UserRoles"/>
+		<typeAlias type="com.singbon.weixin.entity.ServerInfo" alias="ServerInfo"/>
+		<typeAlias type="com.singbon.weixin.entity.Log" alias="Log"/>
+		<typeAlias type="com.singbon.weixin.entity.Customer" alias="Customer"/>
+		<typeAlias type="com.singbon.weixin.entity.Employee" alias="Employee"/>
+		<typeAlias type="com.singbon.weixin.entity.Order" alias="Order"/>
+		<typeAlias type="com.singbon.weixin.entity.Product" alias="Product"/>
+		<typeAlias type="com.singbon.weixin.entity.RechargeInfo" alias="RechargeInfo"/>
+	</typeAliases>
+
+</configuration>

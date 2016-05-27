@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="rechargeinfo">
+    <!-- 以下与实体类的中字段一致 -->
+    <sql id="selectId">
+		id,
+		rechargeMoney,
+		cardNo,
+		customerName,
+		rechargeOperator,
+		score,
+		freeMoney,
+		rechargeDate
+	</sql>
+    <!--resultType="RechargeInfo" 每返回一条结果封装到Log里 -->
+    <select id="query" resultType="RechargeInfo" parameterType="RechargeInfo">
+        select
+        <include refid="selectId"/>
+        from rechargeInfo
+        <where>
+            1=1
+            <if test="t.customerName != null and t.customerName != ''">
+                and customerName like '%${t.customerName}%'
+            </if>
+            <if test="t.beginDate != null and t.beginDate !=''">
+                and rechargeDate >= '%${t.beginDate}%'
+            </if>
+            <if test="t.endDate != null and t.endDate !=''">
+                and rechargeDate >= '%${t.endDate}%'
+            </if>
+        </where>
+    </select>
+    <!-- 充值 -->
+    <insert id="add" parameterType="RechargeInfo">
+		insert into rechargeInfo(
+		rechargeMoney,
+		cardNo,
+		customerName,
+		rechargeOperator,
+		score,
+		freeMoney
+		)
+		values (#{rechargeMoney},
+		#{cardNo},#{customerName},#{rechargeOperator},#{score},#{freeMoney}
+		)
+	</insert>
+</mapper>
