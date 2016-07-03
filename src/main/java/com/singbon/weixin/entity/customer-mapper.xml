@@ -135,7 +135,8 @@
             cardPwd = #{cardPwd},
             cardType = #{cardType},
             operateManager = #{operateManager},
-            alarmMoney = #{alarmMoney}
+            alarmMoney = #{alarmMoney},
+            score = #{score}
         </set>
         where id=#{id}
     </update>

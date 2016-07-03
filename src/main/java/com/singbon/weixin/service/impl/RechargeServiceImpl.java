@@ -41,16 +41,20 @@ public class RechargeServiceImpl implements RechargeService {
         }
 
         Customer customer = customers.get(0);
+        customer.setCardMoney(customer.getCardMoney() + rechargeInfo.getRechargeMoney());
 
-        //充值增加积分
-        if (rechargeInfo.getScore().intValue() > 0) {
-            customer.setScore(customer.getScore().intValue() + rechargeInfo.getScore().intValue());
+        if (rechargeInfo.getScore() != null) {
+            //充值增加积分
+            if (rechargeInfo.getScore().intValue() > 0) {
+                customer.setScore(customer.getScore().intValue() + rechargeInfo.getScore().intValue());
+            }
         }
 
-        //充值赠送金额
-        if (rechargeInfo.getFreeMoney() > 0) {
-            customer.setCardMoney(customer.getCardMoney() + rechargeInfo.getRechargeMoney()
-                    + rechargeInfo.getFreeMoney());
+        if (rechargeInfo.getFreeMoney() != null) {
+            //充值赠送金额
+            if (rechargeInfo.getFreeMoney() > 0) {
+                customer.setCardMoney(customer.getCardMoney() + rechargeInfo.getFreeMoney());
+            }
         }
 
         this.rechargeDao.add(rechargeInfo);
