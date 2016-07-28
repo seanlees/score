@@ -6,18 +6,18 @@ import com.singbon.weixin.util.ResponseMessage;
 
 import java.util.List;
 
-public abstract interface RechargeService {
-    public abstract PageView query(PageView paramPageView, RechargeInfo paramCustomer);
+public interface RechargeService {
+    public PageView query(PageView paramPageView, RechargeInfo paramCustomer);
 
-    public abstract ResponseMessage add(RechargeInfo paramCustomer);
+    public ResponseMessage add(RechargeInfo paramCustomer);
 
+    public void modify(RechargeInfo paramCustomer);
 
-    public abstract void modify(RechargeInfo paramCustomer);
+    public RechargeInfo getById(String paramString);
 
-    public abstract RechargeInfo getById(String paramString);
+    public List<RechargeInfo> findAll(RechargeInfo paramCustomer);
 
-    public abstract List<RechargeInfo> findAll(RechargeInfo paramCustomer);
-
+    public void deleteByCardNo(String cardNo);
 }
 
 

@@ -19,7 +19,7 @@
         <include refid="selectId"/>
         from rechargeInfo
         <where>
-            1=1
+            delFlag = FALSE
             <if test="t.customerName != null and t.customerName != ''">
                 and customerName like '%${t.customerName}%'
             </if>
@@ -45,4 +45,8 @@
 		#{cardNo},#{customerName},#{rechargeOperator},#{score},#{freeMoney}
 		)
 	</insert>
+
+    <delete id="deleteByCardNo" parameterType="String">
+		UPDATE `rechargeInfo` set delFlag = true  where cardNo = #{cardNo}
+	</delete>
 </mapper>

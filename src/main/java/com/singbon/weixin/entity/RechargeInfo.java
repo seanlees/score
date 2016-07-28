@@ -39,6 +39,7 @@ public class RechargeInfo implements Serializable {
     private Date beginDate;
     private Date endDate;
     private String customerNo;
+    private Boolean delFlag;
 
 
     public Long getId() {
@@ -127,5 +128,13 @@ public class RechargeInfo implements Serializable {
 
     public void setCustomerNo(String customerNo) {
         this.customerNo = customerNo;
+    }
+
+    public Boolean getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Boolean delFlag) {
+        this.delFlag = delFlag;
     }
 }

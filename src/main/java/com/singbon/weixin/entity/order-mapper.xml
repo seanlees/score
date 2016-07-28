@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+    <!-- 以下与实体类的中字段一致 -->
+    <sql id="selectId">
+		id,
+		orderNo,
+		orderType,
+		productNo,
+		customerNo,
+		employeeNo,
+		employeeName,
+		payMoney,
+		payType,
+		orderDate
+	</sql>
+    <!--resultType="List<Map>" 每返回一条结果封装到Map里 -->
+    <select id="query" resultType="java.util.Map" parameterType="Order">
+        SELECT
+        r.orderNo orderNo,
+        p.productName productName,
+        c.customerName customerName,
+        c.cardNo cardNo,
+        e.employeeName employeeName,
+        r.payMoney payMoney,
+        r.payType payType,
+        r.discount discount,
+        r.orderDate
+        FROM
+        `order` r
+        LEFT JOIN customer c ON r.customerNo = c.customerNo
+        LEFT JOIN employee e ON r.employeeNo = e.employeeNo LEFT JOIN product p ON p.productNo = r.productNo
+        <where>
+            r.delFlag !=TRUE
+            <if test="t.customerName != null and t.customerName != ''">
+                c.customerName like '%${t.customerName}%'
+            </if>
+            <if test="t.orderDate != null and t.orderDate != ''">
+                r.orderDate like '%${t.orderDate}%'
+            </if>
+            <if test="t.payType != null and t.payType != -1 and t.payType != ''">
+                r.payType = '${t.payType}'
+            </if>
+            <if test="t.employeeName != null and t.employeeName != ''">
+                e.employeeName like '%${t.employeeName}%'
+            </if>
+        </where>
+    </select>
+    <select id="findAll" resultType="Order">
+        select
+        <include refid="selectId"/>
+        from order WHERE delFlag != true
+    </select>
+    <!-- 增加用户 -->
+    <insert id="add" parameterType="order">
+		insert into `order`(
+		orderNo,
+		productNo,
+		orderType,
+		customerNo,
+		employeeNo,
+		payMoney,
+		payType,
+		orderDate
+		)
+		values (#{orderNo},#{productNo},
+		#{orderType},#{customerNo},#{employeeNo},#{payMoney},#{payType},
+		#{orderDate}
+		)
+	</insert>
+
+    <!--<delete id="deleteById" parameterType="String">
+        delete from `order` where
+        id=#{id}
+    </delete>-->
+
+    <delete id="deleteByCustomerNo" parameterType="String">
+		UPDATE `order` set delFlag = true  where customerNo = #{customerNo}
+	</delete>
+    <select id="getById" parameterType="String" resultType="Order">
+        select
+        <include refid="selectId"/>
+        from `order` where id=#{id}
+    </select>
+</mapper>

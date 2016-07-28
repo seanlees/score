@@ -78,6 +78,11 @@ public class RechargeServiceImpl implements RechargeService {
     public List<RechargeInfo> findAll(RechargeInfo customer) {
         return this.rechargeDao.queryAll(null);
     }
+
+    @Override
+    public void deleteByCardNo(String cardNo) {
+        this.rechargeDao.deleteByCardNo(cardNo);
+    }
 }
 
 
