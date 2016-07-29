@@ -56,7 +56,7 @@
     <select id="findAll" resultType="Customer">
         select
         <include refid="selectId"/>
-        from customer
+        from customer WHERE delFlag = FALSE;
     </select>
     <!-- 增加用户 -->
     <insert id="add" parameterType="Customer">
@@ -118,25 +118,45 @@
     <select id="queryAll" resultType="Customer">
         select
         <include refid="selectId"/>
-        from customer
+        from customer WHERE delFlag = FALSE
     </select>
 
     <update id="update" parameterType="Customer">
         update customer
         <set>
-            <if test="cardMoney != null and cardMoney !='' and cardMoney >0 ">
+            <if test="cardMoney != null and cardMoney >= 0 ">
                 cardMoney = #{cardMoney},
             </if>
-            customerName=#{customerName},
-            sex=#{sex},
-            birthDay=#{birthDay},
-            mobile=#{mobile},
-            address=#{address},
-            cardPwd = #{cardPwd},
-            cardType = #{cardType},
-            operateManager = #{operateManager},
-            alarmMoney = #{alarmMoney},
-            score = #{score}
+            <if test="customerName != null and customerName !=''">
+                customerName=#{customerName},
+            </if>
+            <if test="sex != null and sex !=''">
+                sex=#{sex},
+            </if>
+            <if test="birthDay != null and birthDay !=''">
+                birthDay=#{birthDay},
+            </if>
+            <if test="mobile != null and mobile !=''">
+                mobile=#{mobile},
+            </if>
+            <if test="address != null and address !=''">
+                address=#{address},
+            </if>
+            <if test="cardPwd != null and cardPwd !=''">
+                cardPwd = #{cardPwd},
+            </if>
+            <if test="cardType != null and cardType !=''">
+                cardType = #{cardType},
+            </if>
+            <if test="operateManager != null and operateManager !=''">
+                operateManager = #{operateManager},
+            </if>
+            <if test="alarmMoney != null and alarmMoney !=''">
+                alarmMoney = #{alarmMoney},
+            </if>
+            <if test="score != null and score !=''">
+                score = #{score}
+            </if>
         </set>
         where id=#{id}
     </update>

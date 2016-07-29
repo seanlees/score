@@ -48,7 +48,7 @@ public class OrderServiceImpl implements OrderService {
             if (money < 0.0D) {
                 return ResponseMessage.fail().message("会员卡内余额不足!");
             }
-            c.setCardMoney(Double.valueOf(c.getCardMoney().doubleValue() - order.getPayMoney().doubleValue()));
+            c.setCardMoney(money);
         }
         if (order.getScore().intValue() > 0) {
             c.setScore(Integer.valueOf(c.getScore().intValue() + order.getScore().intValue()));
