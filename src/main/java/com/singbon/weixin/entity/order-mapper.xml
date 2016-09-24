@@ -34,16 +34,16 @@
         <where>
             r.delFlag !=TRUE
             <if test="t.customerName != null and t.customerName != ''">
-                c.customerName like '%${t.customerName}%'
+                and c.customerName like '%${t.customerName}%'
             </if>
             <if test="t.orderDate != null and t.orderDate != ''">
-                r.orderDate like '%${t.orderDate}%'
+                and r.orderDate like '%${t.orderDate}%'
             </if>
             <if test="t.payType != null and t.payType != -1 and t.payType != ''">
-                r.payType = '${t.payType}'
+                and r.payType = '${t.payType}'
             </if>
             <if test="t.employeeName != null and t.employeeName != ''">
-                e.employeeName like '%${t.employeeName}%'
+                and e.employeeName like '%${t.employeeName}%'
             </if>
         </where>
     </select>
